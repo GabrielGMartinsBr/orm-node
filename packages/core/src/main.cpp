@@ -4,7 +4,7 @@
 int main()
 {
   ruby_init();
-  Reader::read();
+  Reader::testRead();
   // Reader::testJson();
   ruby_finalize();
 }
