@@ -21,6 +21,9 @@ void Method(const FunctionCallbackInfo<Value> &args)
   args.GetReturnValue().Set(
     String::NewFromUtf8(isolate, s.c_str()).ToLocalChecked()
   );
+  // args.GetReturnValue().Set(
+  //   String::NewFromUtf8(isolate, "hello").ToLocalChecked()
+  // );
 }
 
 void Initialize(Local<Object> exports)

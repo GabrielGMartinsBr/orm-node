@@ -6,7 +6,7 @@
   "scripts": {
     "install": "cmake-js compile",
     "configure": "node-gyp configure && npm run fix:clangd",
-    "build": "node-gyp build",
+    "build": "cmake-js",
     "rebuild": "npm run clean && npm run configure && npm run build",
     "clean": "node-gyp clean",
     "test": "node src/test.js",
