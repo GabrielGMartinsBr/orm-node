@@ -1,0 +1,22 @@
+{
+  "name": "@orm/node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install": "cmake-js compile",
+    "configure": "node-gyp configure && npm run fix:clangd",
+    "build": "node-gyp build",
+    "rebuild": "npm run clean && npm run configure && npm run build",
+    "clean": "node-gyp clean",
+    "test": "node src/test.js",
+    "fix:clangd": "node scripts/generateCompileCommands.js"
+  },
+  "author": "Gabriel G. Martins",
+  "license": "ISC",
+  "dependencies": {
+    "cmake-js": "^7.2.1",
+    "node-gyp": "^10.0.1"
+  },
+  "gypfile": true
+}
