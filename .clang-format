@@ -1,0 +1,28 @@
+# BasedOnStyle: Google
+
+FixNamespaceComments: true
+
+---
+Language: Cpp
+Standard: Latest
+
+
+AlignAfterOpenBracket: BlockIndent
+
+BreakBeforeBraces: WebKit
+
+ColumnLimit: 0
+ContinuationIndentWidth: 2
+
+BreakConstructorInitializers: AfterColon
+PackConstructorInitializers: BinPack
+
+Cpp11BracedListStyle: false
+SpaceInEmptyParentheses: false
+SpaceInEmptyBlock: true
+
+# Operators
+BreakBeforeBinaryOperators: NonAssignment
+
+EmptyLineBeforeAccessModifier: Leave
+EmptyLineAfterAccessModifier: Leave
