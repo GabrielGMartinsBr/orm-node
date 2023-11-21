@@ -1,6 +1,10 @@
-#include <iostream>
+#include "Reader.hpp"
+#include "ruby.h"
 
 int main()
 {
-  std::cout << "core works\n";
+  ruby_init();
+  Reader::read();
+  // Reader::testJson();
+  ruby_finalize();
 }
