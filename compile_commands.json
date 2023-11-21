@@ -1,8 +1,0 @@
-[
-  {
-    "directory": "/run/media/home/common/gabrielmartins.dev/dev/cpp/orm-xp/orm-core/build",
-    "command": "/usr/bin/clang++ -I/usr/include/node -I/run/media/home/common/gabrielmartins.dev/dev/cpp/orm-xp/orm-core/src -g -std=gnu++11 -o CMakeFiles/ORM-Core.dir/src/addon.cpp.o -c /run/media/home/common/gabrielmartins.dev/dev/cpp/orm-xp/orm-core/src/addon.cpp",
-    "file": "/run/media/home/common/gabrielmartins.dev/dev/cpp/orm-xp/orm-core/src/addon.cpp",
-    "output": "CMakeFiles/ORM-Core.dir/src/addon.cpp.o"
-  }
-]

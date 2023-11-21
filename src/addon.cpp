@@ -1,4 +1,3 @@
-// hello.cc
 #include <node.h>
 
 #include <vector>
