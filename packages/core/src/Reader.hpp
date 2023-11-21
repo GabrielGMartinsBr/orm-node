@@ -13,6 +13,8 @@
 #include "base/Log.hpp"
 #include "ruby.h"
 
+namespace ORM {
+
 typedef boost::filesystem::path FPath;
 
 namespace bpt = boost::property_tree;
@@ -29,9 +31,11 @@ struct Reader {
 
   static std::string readIndexes(const char *path)
   {
+    ruby_init();
     std::string bin = readFile(path);
     VALUE arr = marshalLoad(bin);
     std::string json = convertToJSON(arr);
+    ruby_finalize();
     return json;
   }
 
@@ -107,3 +111,5 @@ private:
     return absolutePath.string();
   }
 };
+
+} // namespace ORM

@@ -11,6 +11,7 @@ const params = {
     compilerPath: '/usr/bin/clang++',
     includes: [
         '/usr/include/node',
+        '/run/media/home/common/gabrielmartins.dev/dev/cpp/orm-xp/orm-node/packages/core/include/',
         './src'
     ],
     flags: [

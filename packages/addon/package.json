@@ -10,7 +10,8 @@
     "rebuild": "npm run clean && npm run configure && npm run build",
     "clean": "node-gyp clean",
     "test": "node src/test.js",
-    "fix:clangd": "node scripts/generateCompileCommands.js"
+    "fix:clangd": "node scripts/generateCompileCommands.js",
+    "dev": "npm run clean && npm run configure && npm run build && npm run test"
   },
   "author": "Gabriel G. Martins",
   "license": "ISC",
