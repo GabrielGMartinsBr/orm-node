@@ -9,7 +9,7 @@
     "build": "node-gyp build",
     "rebuild": "npm run clean && npm run configure && npm run build",
     "clean": "node-gyp clean",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node src/test.js"
   },
   "author": "Gabriel G. Martins",
   "license": "ISC",
