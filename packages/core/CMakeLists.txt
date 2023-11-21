@@ -1,9 +1,11 @@
 cmake_minimum_required(VERSION 3.5.0)
 project(ORM-Core VERSION 0.1.0)
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-
 set(CMAKE_CXX_STANDARD 11)
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/build)
+
 
 # Debug
 include(CTest)
@@ -21,3 +23,17 @@ include(CPack)
 
 # Executable
 add_executable(${PROJECT_NAME} ${source_files})
+
+
+# Ruby
+find_package(RubyStatic REQUIRED)
+include_directories(${RubyStatic_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} ${RubyStatic_LIBRARIES} -lcrypt)
+
+
+# Boost Filesystem
+find_package(Boost COMPONENTS system filesystem REQUIRED)
+target_link_libraries(${PROJECT_NAME} 
+  ${Boost_FILESYSTEM_LIBRARY}
+  ${Boost_SYSTEM_LIBRARY}
+)
