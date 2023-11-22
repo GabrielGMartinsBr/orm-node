@@ -1,4 +1,4 @@
-const addon = require('../build/Release/addon.node')
+const addon = require('../build/Release/orm-core-addon.node')
 
 const res = JSON.parse(addon.getIndexes());
 
