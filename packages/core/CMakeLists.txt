@@ -7,11 +7,11 @@ set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/build)
 set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/lib)
 
 # Source Headers
-include_directories(include)
-include_directories(src)
+# include_directories(include)
+# include_directories(src)
 
 # Source Files
-file(GLOB_RECURSE source_files src/*.cpp src/*.hpp)
+# file(GLOB_RECURSE source_files src/*.cpp src/*.hpp)
 
 # Debug
 include(CTest)
@@ -31,7 +31,25 @@ find_package(Ruby REQUIRED)
 # ORM/Core Lib
 #
 set(CoreLib "${PROJECT_NAME}-LIB")
-add_library(${CoreLib} STATIC src/core/Reader.cpp)
+add_library(
+  ${CoreLib} STATIC
+  ${CMAKE_SOURCE_DIR}/public/src/orm-core.cpp
+)
+
+target_include_directories(
+  ${CoreLib} PRIVATE
+  ${CMAKE_SOURCE_DIR}/common
+  ${CMAKE_SOURCE_DIR}/public/include
+  ${CMAKE_SOURCE_DIR}/private/include
+  ${CMAKE_SOURCE_DIR}/private/src
+)
+# target_include_directories(
+#   ${CoreLib} PRIVATE
+# )
+
+
+# include_directories(include)
+
 
 # Ruby
 include_directories(${Ruby_INCLUDE_DIRS})
@@ -50,22 +68,22 @@ set_target_properties(${CoreLib} PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
 
 
 
-#--------------------------------------------------------------
-# ORM Dev App(Executable)
-# 
-set(CoreDevApp "${PROJECT_NAME}-DEV-APP")
-add_executable(${CoreDevApp} ${source_files})
+# #--------------------------------------------------------------
+# # ORM Dev App(Executable)
+# # 
+# set(CoreDevApp "${PROJECT_NAME}-DEV-APP")
+# add_executable(${CoreDevApp} ${source_files})
 
-# Boost Filesystem
-target_link_libraries(${CoreDevApp}  
-  ${Boost_FILESYSTEM_LIBRARY}
-  ${Boost_SYSTEM_LIBRARY}
-)
+# # Boost Filesystem
+# target_link_libraries(${CoreDevApp}  
+#   ${Boost_FILESYSTEM_LIBRARY}
+#   ${Boost_SYSTEM_LIBRARY}
+# )
 
-# Ruby
-include_directories(${Ruby_INCLUDE_DIRS})
-target_link_libraries(${CoreDevApp}
-  ${Ruby_LIBRARIES}
-)
+# # Ruby
+# include_directories(${Ruby_INCLUDE_DIRS})
+# target_link_libraries(${CoreDevApp}
+#   ${Ruby_LIBRARIES}
+# )
 
-set_target_properties(${CoreDevApp} PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
+# set_target_properties(${CoreDevApp} PROPERTIES OUTPUT_NAME ${PROJECT_NAME})

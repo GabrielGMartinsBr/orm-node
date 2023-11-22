@@ -4,16 +4,15 @@
 #include <boost/filesystem/path.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
-
 #include <fstream>
 #include <stdexcept>
 #include <string>
 #include <utility>
 
-#include "base/Log.hpp"
+#include "Log.hpp"
 #include "ruby.h"
 
-namespace ORM_APP {
+namespace ORM {
 
 typedef boost::filesystem::path FPath;
 
@@ -39,7 +38,7 @@ struct Reader {
     return json;
   }
 
-private:
+ private:
   static std::string convertToJSON(const VALUE rbArr)
   {
     bpt::ptree entries;
@@ -112,4 +111,4 @@ private:
   }
 };
 
-} // namespace ORM_APP
+}  // namespace ORM

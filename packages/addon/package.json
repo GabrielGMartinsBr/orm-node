@@ -4,14 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "install": "cmake-js compile",
-    "configure": "node-gyp configure && npm run fix:clangd",
-    "build": "cmake-js",
+    "install": "cmake-js",
+    "configure": "cmake-js configure",
+    "build": "cmake-js compile",
     "rebuild": "npm run clean && npm run configure && npm run build",
-    "clean": "node-gyp clean",
+    "clean": "cmake-js clean",
     "test": "node src/test.js",
-    "fix:clangd": "node scripts/generateCompileCommands.js",
-    "dev": "npm run clean && npm run configure && npm run build && npm run test"
+    "launch": "npm run build && npm run test"
   },
   "author": "Gabriel G. Martins",
   "license": "ISC",

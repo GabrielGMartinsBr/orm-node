@@ -1,11 +1,10 @@
-# BasedOnStyle: Google
+BasedOnStyle: Google
 
 FixNamespaceComments: true
 
 ---
 Language: Cpp
 Standard: Latest
-
 
 AlignAfterOpenBracket: BlockIndent
 

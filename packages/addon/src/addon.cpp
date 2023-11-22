@@ -1,9 +1,9 @@
-#include "orm/Reader.h"
-
 #include <node.h>
 
 #include <string>
 #include <vector>
+
+#include "orm-core.h"
 
 namespace demo {
 
@@ -16,15 +16,12 @@ using v8::Value;
 
 void Method(const FunctionCallbackInfo<Value> &args)
 {
-  std::string s = ORM::Reader::readIndexes("../../data/Scripts.rxdata");
+  std::string s = ORM::RXD::getIndexesFrom("../../data/Scripts.rxdata");
 
   Isolate *isolate = args.GetIsolate();
   args.GetReturnValue().Set(
     String::NewFromUtf8(isolate, s.c_str()).ToLocalChecked()
   );
-  // args.GetReturnValue().Set(
-  //   String::NewFromUtf8(isolate, "hello").ToLocalChecked()
-  // );
 }
 
 void Initialize(Local<Object> exports)
@@ -34,4 +31,4 @@ void Initialize(Local<Object> exports)
 
 NODE_MODULE(NODE_GYP_MODULE_NAME, Initialize)
 
-} // namespace demo
+}  // namespace demo

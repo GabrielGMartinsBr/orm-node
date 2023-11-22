@@ -13,7 +13,9 @@ add_definitions(-DNAPI_VERSION=4)
 
 include_directories(${CMAKE_JS_INC})
 include_directories("/usr/include/")
-include_directories("/run/media/home/common/gabrielmartins.dev/dev/cpp/orm-xp/orm-node/packages/core/include")
+include_directories(
+  "/run/media/home/common/gabrielmartins.dev/dev/cpp/orm-xp/orm-node/packages/core/public/include/"
+)
 
 
 file(GLOB SOURCE_FILES "src/addon.cpp")

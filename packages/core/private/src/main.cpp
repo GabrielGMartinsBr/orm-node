@@ -4,7 +4,7 @@
 int main()
 {
   ruby_init();
-  ORM_APP::Reader::testRead();
+  ORM::Reader::testRead();
   // Reader::testJson();
   ruby_finalize();
 }
