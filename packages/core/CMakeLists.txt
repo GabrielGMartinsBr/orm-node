@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 3.5.0)
 project(ORM-Core VERSION 0.1.0)
 
-set(CMAKE_CXX_STANDARD 11)
-
-set(CMAKE_HOME_DIRECTORY ./)
+set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/build)
+set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/lib)
 
+include_directories(include)
 include_directories(src)
 
 # Debug
@@ -22,15 +22,10 @@ set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
 
-# find_package(RubyStatic REQUIRED)
-# include_directories(${RubyStatic_INCLUDE_DIRS})
-# link_libraries(
-#   ${RubyStatic_LIBRARIES}
-#   -lcrypt
-# )
+set(CoreLib "${PROJECT_NAME}")
 
 
-# # Executable
+# Executable
 # add_executable(${PROJECT_NAME} ${source_files})
 
 
@@ -47,31 +42,27 @@ include(CPack)
 #   ${Boost_SYSTEM_LIBRARY}
 # )
 
-include_directories(include)
 
 
 # Create the library
-add_library(${PROJECT_NAME} STATIC src/core/Reader.cpp)
+add_library(${CoreLib} STATIC src/core/Reader.cpp)
 
-set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
 # Ruby
 find_package(Ruby REQUIRED)
 include_directories(${Ruby_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
+target_link_libraries(${CoreLib}
   ${Ruby_LIBRARIES}
-  # -lcrypt
 )
 
 
 # Boost Filesystem
 find_package(Boost REQUIRED COMPONENTS system filesystem)
-target_link_libraries(${PROJECT_NAME}
+target_link_libraries(${CoreLib}
   Boost::boost
   Boost::atomic
   Boost::system
   Boost::filesystem
 )
 
-
-set_target_properties(${PROJECT_NAME} PROPERTIES POSITION_INDEPENDENT_CODE ON)
+set_target_properties(${CoreLib} PROPERTIES POSITION_INDEPENDENT_CODE ON)

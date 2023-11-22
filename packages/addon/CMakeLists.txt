@@ -1,13 +1,14 @@
-cmake_minimum_required(VERSION 3.15)
-# cmake_policy(SET CMP0091 NEW)
-# cmake_policy(SET CMP0042 NEW)
+cmake_minimum_required(VERSION 3.5.0)
+cmake_policy(SET CMP0091 NEW)
+cmake_policy(SET CMP0042 NEW)
+
+set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-# set(CMAKE_CXX_STANDARD 11)
 
 project (addon)
 
-# add_definitions(-DNAPI_VERSION=4)
+add_definitions(-DNAPI_VERSION=4)
 
 include_directories(${CMAKE_JS_INC})
 include_directories("/usr/include/")
