@@ -13,7 +13,7 @@
 #include "base/Log.hpp"
 #include "ruby.h"
 
-namespace ORM {
+namespace ORM_APP {
 
 typedef boost::filesystem::path FPath;
 
@@ -112,4 +112,4 @@ private:
   }
 };
 
-} // namespace ORM
+} // namespace ORM_APP
