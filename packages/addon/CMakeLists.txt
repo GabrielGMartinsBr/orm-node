@@ -9,7 +9,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 project (addon)
 
-add_definitions(-DNAPI_VERSION=4)
+add_definitions(-DNAPI_VERSION=8)
 
 include_directories(${CMAKE_JS_INC})
 include_directories("/usr/include/")
@@ -26,13 +26,12 @@ target_link_libraries(${PROJECT_NAME} ${CMAKE_JS_LIB})
 
 target_link_libraries(${PROJECT_NAME} PRIVATE 
     /run/media/home/common/gabrielmartins.dev/dev/cpp/orm-xp/orm-node/packages/core/lib/libORM-Core.a
-)
+)#include "ORMCore.h"
+
 
 # Boost Filesystem
 find_package(Boost REQUIRED COMPONENTS system filesystem)
 target_link_libraries(${PROJECT_NAME} PRIVATE
-    Boost::boost
-    Boost::atomic
     Boost::system
     Boost::filesystem
 )

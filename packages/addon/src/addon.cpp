@@ -1,36 +1,41 @@
-#include <node.h>
+#include <napi.h>
 
 #include <string>
-#include <vector>
 
 #include "orm-core.h"
 
-namespace demo {
+namespace rxd {
 
-using v8::FunctionCallbackInfo;
-using v8::Isolate;
-using v8::Local;
-using v8::Object;
-using v8::String;
-using v8::Value;
-
-using namespace ORM_C;
-
-void Method(const FunctionCallbackInfo<Value> &args)
+std::string getIndexes()
 {
-  std::string s = RXD::getIndexesFrom("../../data/Scripts.rxdata");
+  return ORM_C::RXD::getIndexesFrom("../../data/Scripts.rxdata");
+  return "{ \"msg\": \"Hey, hello!\" }";
+}
 
-  Isolate *isolate = args.GetIsolate();
-  args.GetReturnValue().Set(
-    String::NewFromUtf8(isolate, s.c_str()).ToLocalChecked()
+Napi::String getIndexesWrapped(const Napi::CallbackInfo& info)
+{
+  Napi::Env env = info.Env();
+  Napi::String returnValue = Napi::String::New(env, getIndexes());
+
+  return returnValue;
+}
+
+Napi::Object Init(Napi::Env env, Napi::Object exports)
+{
+  exports.Set(
+    "getIndexes",
+    Napi::Function::New(env, getIndexesWrapped)
   );
+
+  return exports;
 }
 
-void Initialize(Local<Object> exports)
+}  // namespace rxd
+
+Napi::Object InitAll(Napi::Env env, Napi::Object exports)
 {
-  NODE_SET_METHOD(exports, "hello", Method);
+  rxd::Init(env, exports);
+  return exports;
 }
 
-NODE_MODULE(NODE_GYP_MODULE_NAME, Initialize)
-
-}  // namespace demo
+NODE_API_MODULE(addon, InitAll);
