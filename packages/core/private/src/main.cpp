@@ -1,6 +1,7 @@
+#include "Log.hpp"
 #include "Reader.hpp"
 
 int main()
 {
-  ORM_C::Reader::readIndexes("../../../data/Scripts.rxdata");
+  Log::out() << ORM_C::Reader::readIndexes("../../../data/Scripts.rxdata");
 }
