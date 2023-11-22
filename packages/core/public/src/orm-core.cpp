@@ -2,14 +2,14 @@
 
 #include <string>
 
-#include "Reader.hpp"
+#include "Core.hpp"
 
-std::string ORM_C::RXD::getIndexesFrom(const char* filePath)
+std::string ORMC::RXD::getIndexesFrom(const char* filePath)
 {
-  return Reader::readIndexes(filePath);
+  return Core::getInstance().rxdReader.readIndexes(filePath);
 }
 
-std::string ORM_C::RXD::getContent(
+std::string ORMC::RXD::getContent(
   const char* filePath, unsigned int uid
 )
 {

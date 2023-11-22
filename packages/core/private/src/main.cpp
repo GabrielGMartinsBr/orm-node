@@ -1,7 +1,12 @@
+#include "Core.hpp"
 #include "Log.hpp"
-#include "Reader.hpp"
 
 int main()
 {
-  Log::out() << ORM_C::Reader::readIndexes("../../../data/Scripts.rxdata");
+  ORMC::Core& core = ORMC::Core::getInstance();
+  const char* fname = "../../../data/Scripts.rxdata";
+
+  Log::out() << "size: " << core.rxdReader.readIndexes(fname).size();
+  Log::out() << "size: " << core.rxdReader.readIndexes(fname).size();
+  Log::out() << "size: " << core.rxdReader.readIndexes(fname).size();
 }

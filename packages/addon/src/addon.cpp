@@ -9,7 +9,7 @@ namespace rxd {
 
 std::string getIndexes(const char* filePath)
 {
-  return ORM_C::RXD::getIndexesFrom(filePath);
+  return ORMC::RXD::getIndexesFrom(filePath);
 }
 
 Napi::String getIndexesWrapped(const Napi::CallbackInfo& info)

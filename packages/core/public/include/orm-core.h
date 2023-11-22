@@ -4,7 +4,7 @@
 
 #define EXPORT __attribute__((__visibility__("default")))
 
-namespace ORM_C {
+namespace ORMC {
 
 struct EXPORT RXD {
   static std::string getIndexesFrom(const char* filePath);

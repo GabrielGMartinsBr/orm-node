@@ -7,39 +7,41 @@
 #include <fstream>
 #include <stdexcept>
 #include <string>
+#include <string_view>
 #include <utility>
 
 #include "Log.hpp"
+#include "ruby/internal/intern/gc.h"
 #include "ruby/ruby.h"
 
-namespace ORM_C {
+namespace ORMC {
 
 typedef boost::filesystem::path FPath;
 
 namespace bpt = boost::property_tree;
 
-struct Reader {
-  static std::string readIndexes(const char *path)
+struct RxdReader {
+  std::string readIndexes(const char *path)
   {
-    ruby_init();
     std::string bin = readFile(path);
-    VALUE arr = marshalLoad(bin);
-    std::string json = convertToJSON(arr);
-    ruby_finalize();
+    VALUE rbArr = marshalLoad(bin);
+    std::string json = convertToJSON(rbArr);
+    rb_gc();
     return json;
   }
 
  private:
-  static std::string convertToJSON(const VALUE rbArr)
+  std::string convertToJSON(const VALUE rbArr)
   {
     bpt::ptree entries;
-
+    VALUE rbEntry, rbId, rbName;
     unsigned int len = rb_array_len(rbArr);
+    
     for (int i = 0; i < len; i++) {
-      VALUE rbEntry = rb_ary_entry(rbArr, i);
-      VALUE rbId = rb_ary_entry(rbEntry, 0);
-      VALUE rbName = rb_ary_entry(rbEntry, 1);
-      VALUE rbCode = rb_ary_entry(rbEntry, 2);
+      rbEntry = rb_ary_entry(rbArr, i);
+      rbId = rb_ary_entry(rbEntry, 0);
+      rbName = rb_ary_entry(rbEntry, 1);
+      // VALUE rbCode = rb_ary_entry(rbEntry, 2);
 
       unsigned int id = FIX2INT(rbId);
       const char *name = RSTRING_PTR(rbName);
@@ -64,7 +66,7 @@ struct Reader {
     return oss.str();
   }
 
-  static VALUE marshalLoad(const std::string &data)
+  VALUE marshalLoad(const std::string &data)
   {
     VALUE rbStr = rb_str_new(data.c_str(), data.size());
     if (NIL_P(rbStr)) {
@@ -82,7 +84,7 @@ struct Reader {
     return rbArr;
   }
 
-  static std::string readFile(const char *path)
+  std::string readFile(const char *path)
   {
     std::ifstream inputFile(resolvePath(path));
     if (!inputFile.is_open()) {
@@ -94,7 +96,7 @@ struct Reader {
     return oss.str();
   }
 
-  static std::string resolvePath(const char *path)
+  std::string resolvePath(const char *path)
   {
     FPath relative(path);
     FPath absolutePath = boost::filesystem::canonical(relative);
@@ -102,4 +104,4 @@ struct Reader {
   }
 };
 
-}  // namespace ORM_C
+}  // namespace ORMC
