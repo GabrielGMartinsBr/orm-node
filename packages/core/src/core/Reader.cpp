@@ -28,8 +28,8 @@ std::string convertToJSON(const VALUE rbArr)
     VALUE rbCode = rb_ary_entry(rbEntry, 2);
 
     unsigned int id = FIX2INT(rbId);
-    const char *name = RSTRING_PTR(rbName);
-    // const char *code = RSTRING_PTR(rbCode);
+    const char *name = StringValuePtr(rbName);
+    // const char *code = StringValuePtr(rbCode);
 
     bpt::ptree item;
     item.put("id", id);
@@ -59,11 +59,11 @@ VALUE marshalLoad(const std::string &data)
 
   VALUE rbArr = rb_marshal_load(rbStr);
 
-  VALUE errorMsg = rb_gv_get("$!");
-  if (errorMsg != Qnil) {
-    rb_p(errorMsg);
-    throw std::runtime_error("Marshal load failed.");
-  }
+  // VALUE errorMsg = rb_gv_get("$!");
+  // if (errorMsg != Qnil) {
+  //   rb_p(errorMsg);
+  //   throw std::runtime_error("Marshal load failed.");
+  // }
 
   return rbArr;
 }
@@ -89,10 +89,18 @@ std::string readFile(const char *path)
 
 std::string ORM::Reader::readIndexes(const char *path)
 {
-  ruby_init();
+  std::string absPath = resolvePath(path);
   std::string bin = readFile(path);
+  Log::out() << "Size: " << bin.size();
+
+  ruby_init();
+  rb_eval_string("puts RUBY_VERSION");
+
   VALUE arr = marshalLoad(bin);
   std::string json = convertToJSON(arr);
+
   ruby_finalize();
   return json;
+
+  return absPath;
 }

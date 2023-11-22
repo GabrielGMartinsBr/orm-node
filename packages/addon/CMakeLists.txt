@@ -31,22 +31,22 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 # Ruby
 # find_package(RubyStatic REQUIRED)
 # include_directories(${RubyStatic_INCLUDE_DIRS})
-# target_link_libraries(${PROJECT_NAME} ${RubyStatic_LIBRARIES} -lcrypt)
+# target_link_libraries(${PROJECT_NAME} PRIVATE
+#   ${RubyStatic_LIBRARIES}
+#   -lcrypt
+# )
 
 # Boost Filesystem
 find_package(Boost REQUIRED COMPONENTS system filesystem)
-# target_link_libraries(${PROJECT_NAME}
-#   ${Boost_FILESYSTEM_LIBRARY}
-#   ${Boost_SYSTEM_LIBRARY}
-#   # ${Boost_SERILIZATION}
-#   # ${Boost_JSON}
-# )
 target_link_libraries(${PROJECT_NAME} PRIVATE
     Boost::boost
     Boost::atomic
     Boost::system
     Boost::filesystem
 )
+
+find_package(Ruby REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE ${RUBY_LIBRARY})
 
 if(MSVC AND CMAKE_JS_NODELIB_DEF AND CMAKE_JS_NODELIB_TARGET)
   # Generate node.lib
