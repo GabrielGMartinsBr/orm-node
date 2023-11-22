@@ -2,11 +2,16 @@
   "name": "@orm/node",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "install": "cmake-js",
     "configure": "cmake-js configure",
-    "build": "cmake-js compile",
+    "build": "cmake-js compile && tsup",
     "rebuild": "npm run clean && npm run configure && npm run build",
     "clean": "cmake-js clean",
     "test": "node src/test.js",
@@ -24,5 +29,10 @@
     "napi_versions": [
       8
     ]
+  },
+  "devDependencies": {
+    "tsup": "^8.0.1",
+    "tsx": "^4.2.0",
+    "typescript": "^5.3.2"
   }
 }

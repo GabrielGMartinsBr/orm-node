@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "module": "CommonJS",
+        "target": "ES2019",
+        "declaration": true,
+        "outDir": "./dist",
+        "baseUrl": ".",
+        "paths": {
+            "orm-core-addon.node": [
+                "./build/Release/orm-core-addon.node"
+            ]
+        }
+    },
+    "include": [
+        "src/**/*"
+    ]
+}
