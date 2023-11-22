@@ -17,24 +17,12 @@ include_directories("/run/media/home/common/gabrielmartins.dev/dev/cpp/orm-xp/or
 file(GLOB SOURCE_FILES "src/addon.cpp")
 
 add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES} ${CMAKE_JS_SRC})
-# add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES} ${CMAKE_JS_SRC})
 set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "" SUFFIX ".node")
 target_link_libraries(${PROJECT_NAME} ${CMAKE_JS_LIB})
 
 target_link_libraries(${PROJECT_NAME} PRIVATE 
     /run/media/home/common/gabrielmartins.dev/dev/cpp/orm-xp/orm-node/packages/core/lib/libORM-Core.a
 )
-# target_include_directories(${PROJECT_NAME} "/run/media/home/common/gabrielmartins.dev/dev/cpp/orm-xp/orm-node/packages/core/include")
-# set_target_properties(${PROJECT_NAME} PROPERTIES POSITION_INDEPENDENT_CODE ON)
-
-
-# Ruby
-# find_package(RubyStatic REQUIRED)
-# include_directories(${RubyStatic_INCLUDE_DIRS})
-# target_link_libraries(${PROJECT_NAME} PRIVATE
-#   ${RubyStatic_LIBRARIES}
-#   -lcrypt
-# )
 
 # Boost Filesystem
 find_package(Boost REQUIRED COMPONENTS system filesystem)
@@ -46,6 +34,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 )
 
 find_package(Ruby REQUIRED)
+include_directories(${Ruby_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME} PRIVATE ${RUBY_LIBRARY})
 
 if(MSVC AND CMAKE_JS_NODELIB_DEF AND CMAKE_JS_NODELIB_TARGET)

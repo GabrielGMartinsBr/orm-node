@@ -12,6 +12,7 @@
 #include <utility>
 
 #include "base/Log.hpp"
+#include "ruby/internal/interpreter.h"
 
 namespace bpt = boost::property_tree;
 typedef boost::filesystem::path FPath;
@@ -94,6 +95,7 @@ std::string ORM::Reader::readIndexes(const char *path)
   Log::out() << "Size: " << bin.size();
 
   ruby_init();
+  ruby_init_loadpath();
   rb_eval_string("puts RUBY_VERSION");
 
   VALUE arr = marshalLoad(bin);

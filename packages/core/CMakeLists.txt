@@ -22,12 +22,12 @@ set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
 
-find_package(RubyStatic REQUIRED)
-include_directories(${RubyStatic_INCLUDE_DIRS})
-link_libraries(
-  ${RubyStatic_LIBRARIES}
-  -lcrypt
-)
+# find_package(RubyStatic REQUIRED)
+# include_directories(${RubyStatic_INCLUDE_DIRS})
+# link_libraries(
+#   ${RubyStatic_LIBRARIES}
+#   -lcrypt
+# )
 
 
 # # Executable
@@ -56,12 +56,12 @@ add_library(${PROJECT_NAME} STATIC src/core/Reader.cpp)
 set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
 # Ruby
-# find_package(RubyStatic REQUIRED)
-# include_directories(${RubyStatic_INCLUDE_DIRS})
-# target_link_libraries(${PROJECT_NAME}
-#   ${RubyStatic_LIBRARIES}
-#   -lcrypt
-# )
+find_package(Ruby REQUIRED)
+include_directories(${Ruby_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME}
+  ${Ruby_LIBRARIES}
+  # -lcrypt
+)
 
 
 # Boost Filesystem
