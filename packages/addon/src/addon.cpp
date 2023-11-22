@@ -14,9 +14,11 @@ using v8::Object;
 using v8::String;
 using v8::Value;
 
+using namespace ORM_C;
+
 void Method(const FunctionCallbackInfo<Value> &args)
 {
-  std::string s = ORM::RXD::getIndexesFrom("../../data/Scripts.rxdata");
+  std::string s = RXD::getIndexesFrom("../../data/Scripts.rxdata");
 
   Isolate *isolate = args.GetIsolate();
   args.GetReturnValue().Set(

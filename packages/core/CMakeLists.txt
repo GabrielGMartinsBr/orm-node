@@ -43,24 +43,24 @@ target_include_directories(
   ${CMAKE_SOURCE_DIR}/private/include
   ${CMAKE_SOURCE_DIR}/private/src
 )
-# target_include_directories(
-#   ${CoreLib} PRIVATE
-# )
-
-
-# include_directories(include)
-
 
 # Ruby
-include_directories(${Ruby_INCLUDE_DIRS})
+target_include_directories(
+  ${CoreLib} PRIVATE
+  ${Ruby_INCLUDE_DIRS}
+)
 target_link_libraries(${CoreLib}
   ${Ruby_LIBRARIES}
 )
 
-# Boost Filesystem
+# Boost
+target_include_directories(
+  ${CoreLib} PRIVATE
+  ${Boost_INCLUDE_DIRS}
+)
 target_link_libraries(${CoreLib}
-  Boost::system
-  Boost::filesystem
+  ${Boost_FILESYSTEM_LIBRARY}
+  ${Boost_SYSTEM_LIBRARY}
 )
 
 set_target_properties(${CoreLib} PROPERTIES POSITION_INDEPENDENT_CODE ON)

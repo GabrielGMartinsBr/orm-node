@@ -10,24 +10,15 @@
 #include <utility>
 
 #include "Log.hpp"
-#include "ruby.h"
+#include "ruby/ruby.h"
 
-namespace ORM {
+namespace ORM_C {
 
 typedef boost::filesystem::path FPath;
 
 namespace bpt = boost::property_tree;
 
 struct Reader {
-  static void testRead()
-  {
-    std::string bin = readFile("../../../data/Scripts.rxdata");
-    VALUE arr = marshalLoad(bin);
-    std::string json = convertToJSON(arr);
-
-    Log::out() << json;
-  }
-
   static std::string readIndexes(const char *path)
   {
     ruby_init();
@@ -43,7 +34,7 @@ struct Reader {
   {
     bpt::ptree entries;
 
-    unsigned int len = RARRAY_LEN(rbArr);
+    unsigned int len = rb_array_len(rbArr);
     for (int i = 0; i < len; i++) {
       VALUE rbEntry = rb_ary_entry(rbArr, i);
       VALUE rbId = rb_ary_entry(rbEntry, 0);
@@ -111,4 +102,4 @@ struct Reader {
   }
 };
 
-}  // namespace ORM
+}  // namespace ORM_C

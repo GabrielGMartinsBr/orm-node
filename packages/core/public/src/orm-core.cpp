@@ -4,12 +4,12 @@
 
 #include "Reader.hpp"
 
-std::string ORM::RXD::getIndexesFrom(const char* filePath)
+std::string ORM_C::RXD::getIndexesFrom(const char* filePath)
 {
   return Reader::readIndexes(filePath);
 }
 
-std::string ORM::RXD::getContent(
+std::string ORM_C::RXD::getContent(
   const char* filePath, unsigned int uid
 )
 {

@@ -1,10 +1,6 @@
 #include "Reader.hpp"
-#include "ruby.h"
 
 int main()
 {
-  ruby_init();
-  ORM::Reader::testRead();
-  // Reader::testJson();
-  ruby_finalize();
+  ORM_C::Reader::readIndexes("../../../data/Scripts.rxdata");
 }
