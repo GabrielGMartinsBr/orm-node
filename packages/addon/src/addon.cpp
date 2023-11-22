@@ -1,21 +1,31 @@
 #include <napi.h>
 
+#include <iostream>
 #include <string>
 
 #include "orm-core.h"
 
 namespace rxd {
 
-std::string getIndexes()
+std::string getIndexes(const char* filePath)
 {
-  return ORM_C::RXD::getIndexesFrom("../../data/Scripts.rxdata");
-  return "{ \"msg\": \"Hey, hello!\" }";
+  return ORM_C::RXD::getIndexesFrom(filePath);
 }
 
 Napi::String getIndexesWrapped(const Napi::CallbackInfo& info)
 {
   Napi::Env env = info.Env();
-  Napi::String returnValue = Napi::String::New(env, getIndexes());
+
+  if (info.Length() != 1 || !info[0].IsString()) {
+    Napi::TypeError::New(env, "File path expected.")
+      .ThrowAsJavaScriptException();
+  }
+
+  Napi::String param = info[0].As<Napi::String>();
+  std::string filePath = param.Utf8Value();
+  std::string result = getIndexes(filePath.c_str());
+
+  Napi::String returnValue = Napi::String::New(env, result);
 
   return returnValue;
 }

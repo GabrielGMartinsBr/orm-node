@@ -14,4 +14,4 @@ export class RXD {
     }
 }
 
-console.log(RXD.getIndexes('')[64]);
+// console.log(RXD.getIndexes('../'));
