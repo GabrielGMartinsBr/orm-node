@@ -1,5 +1,13 @@
 const addon = require('../build/Release/orm-core-addon.node')
 
-const res = JSON.parse(addon.getIndexes());
+const fPath = '../../data/Scripts.rxdata';
 
-console.log(res.scripts[0]);
+const res = JSON.parse(addon.getIndexes(fPath));
+
+
+for (const i of res.scripts) {
+    i.id = +i.id;
+}
+
+const content = addon.getContent(fPath, res.scripts[1].id);
+console.log(content);

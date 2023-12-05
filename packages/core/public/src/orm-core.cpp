@@ -10,8 +10,8 @@ std::string ORMC::RXD::getIndexesFrom(const char* filePath)
 }
 
 std::string ORMC::RXD::getContent(
-  const char* filePath, unsigned int uid
+  const char* filePath, unsigned int scriptId
 )
 {
-  return std::string("Content!");
+  return Core::getInstance().rxdReader.readContent(filePath, scriptId);
 }

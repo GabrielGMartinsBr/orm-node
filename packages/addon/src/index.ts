@@ -10,7 +10,18 @@ export class RXD {
         if (!result?.scripts) {
             return null;
         }
+        for (const i of result.scripts) {
+            i.id = +i.id;
+        }
         return result.scripts;
+    }
+
+    static getContent(filePath: string, scriptId: number) {
+        const strData = addon.getContent(filePath, scriptId);
+        if (!strData) {
+            return null;
+        }
+        return strData;
     }
 }
 

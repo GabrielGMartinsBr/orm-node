@@ -9,7 +9,7 @@ namespace ORMC {
 struct EXPORT RXD {
   static std::string getIndexesFrom(const char* filePath);
 
-  static std::string getContent(const char* filePath, unsigned int uid);
+  static std::string getContent(const char* filePath, unsigned int scriptId);
 };
 
-}  // namespace ORM
+}  // namespace ORMC

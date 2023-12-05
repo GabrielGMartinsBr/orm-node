@@ -2,7 +2,6 @@
 
 #include "Log.hpp"
 #include "RxdReader.hpp"
-#include "ruby/ruby.h"
 
 namespace ORMC {
 

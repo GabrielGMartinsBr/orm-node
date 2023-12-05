@@ -17,6 +17,7 @@ include(CPack)
 
 find_package(Boost REQUIRED COMPONENTS system filesystem)
 find_package(Ruby REQUIRED)
+find_package(ZLIB REQUIRED)
 
 
 
@@ -55,6 +56,17 @@ target_link_libraries(${CoreLib}
   ${Boost_FILESYSTEM_LIBRARY}
   ${Boost_SYSTEM_LIBRARY}
 )
+
+# Zlib
+target_include_directories(
+  ${CoreLib} PRIVATE
+  ${ZLIB_INCLUDE_DIRS}
+)
+target_link_libraries(
+  ${CoreLib}
+  ZLIB::ZLIB
+)
+
 
 set_target_properties(${CoreLib} PROPERTIES POSITION_INDEPENDENT_CODE ON)
 set_target_properties(${CoreLib} PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
@@ -100,6 +112,16 @@ target_include_directories(
 target_link_libraries(${CoreDevApp}
   ${Boost_FILESYSTEM_LIBRARY}
   ${Boost_SYSTEM_LIBRARY}
+)
+
+# Zlib
+target_include_directories(
+  ${CoreDevApp} PRIVATE
+  ${ZLIB_INCLUDE_DIRS}
+)
+target_link_libraries(
+  ${CoreDevApp}
+  ZLIB::ZLIB
 )
 
 set_target_properties(${CoreDevApp} PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
